@@ -16,6 +16,9 @@ app.get('/', (req, res) => {
 mongoose.connect(process.env.MONGO_URI)
   .then(() => {
     console.log("Database connected")
+    const listener = app.listen(process.env.PORT || 3000, () => {
+      console.log('Your app is listening on port ' + listener.address().port)
+    })
   })
   .catch((e) => {
     console.log(e)
@@ -137,9 +140,3 @@ app.get('/api/users/:_id/logs', async (req, res) => {
     log: filteredLog
   })
 });
-
-
-
-const listener = app.listen(process.env.PORT || 3000, () => {
-  console.log('Your app is listening on port ' + listener.address().port)
-})
